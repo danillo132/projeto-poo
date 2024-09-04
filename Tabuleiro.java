@@ -85,13 +85,13 @@ public class Tabuleiro {
         for (int i = 0; i < 8; i++) {
             tabuleiro[6][i].setPeça(new Peão("branco")); // Peões brancos na linha 2 (6, 0-7)
         }
-
+        /* 
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 System.out.print(tabuleiro[i][j].getCor() + " ");
             }
             System.out.print("\n");
-        }
+        }*/
     }
 
     public boolean noLimite(int linha, char coluna) {
@@ -99,9 +99,12 @@ public class Tabuleiro {
     }
 
     public String desenho() {
+        String ANSI_YELLOW = "\u001B[33m";
+        String ANSI_RESET = "\u001B[0m";
+
         StringBuilder desenho = new StringBuilder();
         for (int i = 0; i < 8; i++) {
-            desenho.append(8 - i + " ");
+            desenho.append(ANSI_YELLOW + (8 - i) + ANSI_RESET + " ");
             for (int j = 0; j < 8; j++) {
                 Peça peça = tabuleiro[i][j].getPeça();
                 if (peça == null) {
@@ -114,8 +117,10 @@ public class Tabuleiro {
         }
         desenho.append("  ");
         char colunas[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+        
+
         for (int i = 0; i < 8; i++) {
-            desenho.append(colunas[i] + " ");
+            desenho.append(ANSI_YELLOW + colunas[i] + ANSI_RESET + " ");
         }
         return desenho.toString();
     }
