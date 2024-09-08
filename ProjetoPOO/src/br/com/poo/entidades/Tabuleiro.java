@@ -127,6 +127,11 @@ public class Tabuleiro {
         }
         return desenho.toString();
     }
+    
+    public Casa[][] getTabuleiro() {
+		return tabuleiro;
+	}
+    
 
     public static void main(String[] args) {
         Tabuleiro board1 = new Tabuleiro();
