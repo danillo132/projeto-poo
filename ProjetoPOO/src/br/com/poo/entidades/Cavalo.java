@@ -6,6 +6,7 @@ public class Cavalo extends Peça {
         super("C", cor, true);
     }
 
+    @Override
     public String desenho(){
         if (this.getCor().equals("preto"))
             return "\u001B[31m" + "C" + "\u001B[0m";
@@ -13,7 +14,23 @@ public class Cavalo extends Peça {
             return "C"; 
     }
 
-    //abstract String desenho();
-    //abstract boolean movimentoValido(int colunaO, char linhaO, int colunaD, char linhaD);
-    //abstract String caminho(int colunaO, char linhaO, int colunaD, char linhaD);
+	@Override
+	boolean movimentoValido( int linhaO, char colunaO, int  linhaD, char colunaD) {
+		  int diferencaColuna = Math.abs(colunaO - colunaD);
+	        int diferencaLinha = Math.abs(linhaO - linhaD);
+	        return (diferencaColuna == 2 && diferencaLinha == 1) || (diferencaColuna == 1 && diferencaLinha == 2);
+	}
+
+	@Override
+	String caminho(int linhaO, char colunaO, int linhaD, char colunaD) {
+	    if(this.movimentoValido(linhaO, colunaO, linhaD, colunaD)) {
+	        StringBuilder caminho = new StringBuilder();
+	     
+	        
+	    } else {
+	        return "";
+	    }
+	}
+
+ 
 }

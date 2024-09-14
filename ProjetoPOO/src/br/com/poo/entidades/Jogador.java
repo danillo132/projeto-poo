@@ -9,9 +9,7 @@ public class Jogador {
 	private String nomeJogador;
 	private List<Peça> peças;
 	private int numPeçasAtivas;
-	
-	public Jogador() {
-	}
+
 	
 	public Jogador(String nomeJogador, List<Peça> peças) {
 		this.nomeJogador = nomeJogador;

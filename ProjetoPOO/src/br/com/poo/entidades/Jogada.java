@@ -12,8 +12,7 @@ public class Jogada {
 	private Casa posicaoFinal;
 	private Caminho caminho;
 
-	public Jogada() {
-	}
+
 
 	public Jogada(Jogador jogador,Jogador jogadorAdversario, Casa posicaoInicial, Casa posicaoFinal) {
 		this.jogador = jogador;
@@ -43,6 +42,7 @@ public class Jogada {
 			}
 			return false;
 		}
+		return false;
 	}
 
 	public boolean ehXeque(Tabuleiro tabuleiro) {

@@ -10,10 +10,6 @@ public class Caminho {
 	private List<Casa> sequenciaDeCasas;
 	
 	
-	
-	public Caminho() {
-	}
-	
 	public Caminho(Casa posicaoInicial, Casa posicaoFinal) {
 		sequenciaDeCasas = new ArrayList<>();
 		

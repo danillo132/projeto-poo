@@ -36,9 +36,9 @@ public abstract class Peça {
 
      
     abstract public String desenho();
-  /* 
-    abstract boolean movimentoValido(int colunaO, char linhaO, int colunaD, char linhaD);
 
-    abstract String caminho(int colunaO, char linhaO, int colunaD, char linhaD);
-     */
+    abstract boolean movimentoValido( int linhaO, char colunaO, int  linhaD, char colunaD);
+    
+    
+    abstract String caminho( int linhaO, char colunaO, int  linhaD, char colunaD);
 }
