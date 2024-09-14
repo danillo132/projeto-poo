@@ -23,6 +23,7 @@ public class Jogada {
 
 
 	public boolean ehValida(Tabuleiro tabuleiro, Jogador jogadorDoTurno) {
+		caminho.populaCaminho(tabuleiro);
 		String corPeçasJogador = jogadorDoTurno.getPeças().get(0).getCor();
 		if (tabuleiro.noLimite(posicaoInicial.getLinha(), posicaoInicial.getColuna())
 				&& tabuleiro.noLimite(posicaoFinal.getLinha(), posicaoFinal.getColuna())) {
