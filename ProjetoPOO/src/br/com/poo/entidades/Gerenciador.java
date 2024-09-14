@@ -65,8 +65,8 @@ public class Gerenciador {
 //    	Peça peao = new Peão("white");
 //    	System.out.println( peao.caminho(2, 'c', 3, 'b'));
 //    	
-//    	Peça cavalo = new Cavalo("white");
-//    	System.out.println( cavalo.caminho(4, 'b', 5, 'd'));
+    	Peça cavalo = new Cavalo("white");
+    	System.out.println( cavalo.caminho(2, 'a', 1, 'c'));
     	
 
 
