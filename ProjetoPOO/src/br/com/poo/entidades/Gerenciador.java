@@ -1,7 +1,6 @@
 package br.com.poo.entidades;
 
 import java.util.Scanner;
-import java.util.logging.LogRecord;
 
 /**
  * Classe onde deve-se criar e disparar o jogo bem como carregar um jogo através
@@ -10,7 +9,8 @@ import java.util.logging.LogRecord;
 public class Gerenciador {
 
     public static void main(String[] args) {
-        testesDesenvolvimento();
+        Gerenciador gerenciador = new Gerenciador();
+        gerenciador.menu();        
     }
 
     private Jogo jogo;
@@ -28,8 +28,8 @@ public class Gerenciador {
             int opcao = ler.nextInt();
 
             if (opcao == 1) {
-                novoJogo();
-                jogo.iniciarJogo();
+                Jogo jogo1 = new Jogo();
+                jogo.iniciarJogo();               
             }
             if (opcao == 2) {
                 carregarJogo();
@@ -43,16 +43,14 @@ public class Gerenciador {
     }
 
     private static void testesDesenvolvimento() {
-        /**
-         * Método responsável pelos testes exaustivos durante o desenvolvimento
-         */
+      
     }
-
+/* 
     public void novoJogo() {
         jogo = new Jogo();
         jogo.iniciarJogo();
     }
-
+*/
     public void carregarJogo() {
 
     }

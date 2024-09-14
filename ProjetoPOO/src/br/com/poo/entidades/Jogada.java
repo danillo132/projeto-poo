@@ -1,8 +1,5 @@
 package br.com.poo.entidades;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Jogada {
 
 	private Jogador jogador;
@@ -19,7 +16,7 @@ public class Jogada {
 		this.posicaoFinal = posicaoFinal;
 		caminho = new Caminho(posicaoInicial, posicaoFinal);
 	}
-
+ /* 
 	public boolean ehValida(Tabuleiro tabuleiro) {
 		if (tabuleiro.noLimite(posicaoInicial.getLinha(), posicaoInicial.getColuna())
 				&& tabuleiro.noLimite(posicaoFinal.getLinha(), posicaoFinal.getColuna())) {
@@ -94,5 +91,5 @@ public class Jogada {
 			}
 		}
 		return adversarios;
-	}
+	}*/
 }

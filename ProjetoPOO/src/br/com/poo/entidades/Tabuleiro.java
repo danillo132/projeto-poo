@@ -63,8 +63,13 @@ public class Tabuleiro {
         return tabuleiro;
     }
 
+    public Casa getCasa(int linha, int coluna){
+        return tabuleiro[linha][coluna];
+    }
+/* 
     public static void main(String[] args) {
         Tabuleiro board1 = new Tabuleiro();
         System.out.println("\n" + board1.desenho());
     }
+  */  
 }
