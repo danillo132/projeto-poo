@@ -14,16 +14,43 @@ public class Jogo {
     private List<Peça> peçasBrancas;
     private List<Peça> peçasPretas;
     private Jogador jogadorAtual;
+    private Jogador jogadorAdversario;
     private List<String> historicoJogadas;
     private boolean jogoFinalizado;
 
     public Jogo() {
         //Cria dois jogadores
         //Cria um tabuleiro
-        //Cria todas as peças
+        //Cria todas as peças        
+
         this.tabuleiro = new Tabuleiro();
 
         this.peçasBrancas = new ArrayList<>();
+        this.peçasPretas = new ArrayList<>();
+
+        inicializarPeças();
+
+        System.out.println("Insira do nome do jogador 1 - peças brancas");
+        String nomeJogador1 = ler.nextLine();
+        this.jogador1 = new Jogador(nomeJogador1, this.peçasBrancas);
+
+        System.err.println("");
+
+        System.out.println("Insira do nome do jogador 2 - peças pretas");
+        String nomeJogador2 = ler.nextLine();
+        this.jogador2 = new Jogador(nomeJogador2, this.peçasPretas);
+
+        jogoFinalizado = false;
+        jogadorAtual = jogador1;
+        jogadorAdversario = jogador2;
+        jogador1.peçasDe();
+        jogador2.peçasDe();
+
+        iniciarJogo();
+
+    }
+
+    public void inicializarPeças() {
 
         peçasBrancas.add(new Torre("branca"));
         peçasBrancas.add(new Cavalo("branca"));
@@ -43,7 +70,6 @@ public class Jogo {
             tabuleiro.setPeça(6, i, peçasBrancas.get(i + 8));
         }
 
-        this.peçasPretas = new ArrayList<>();
         peçasPretas.add(new Torre("preta"));
         peçasPretas.add(new Cavalo("preta"));
         peçasPretas.add(new Bispo("preta"));
@@ -62,34 +88,58 @@ public class Jogo {
             tabuleiro.setPeça(1, i, peçasPretas.get(i + 8));
         }
 
-        System.out.println("Insira do nome do jogador 1 - peças brancas");
-        String nomeJogador1 = ler.nextLine();
-        this.jogador1 = new Jogador(nomeJogador1, this.peçasBrancas);
-
-        System.out.println("Insira do nome do jogador 2 - peças pretas");
-        String nomeJogador2 = ler.nextLine();
-        this.jogador2 = new Jogador(nomeJogador2, this.peçasPretas);
-
     }
-    /* 
+
+    //public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD){}
+    //public void realizaJogada(int linhaO, int colunaO, int linhaD, int colunaD){}
+    //public String registroJogo();
     public void iniciarJogo() {
         while (!jogoFinalizado) {
-            System.out.println("Vez do jogador: " + jogadorAtual);
-            System.out.println("Digite sua jogada ou salvar - para salvar e sair");
-            String jogada = ler.nextLine();
+            System.out.println("Vez do jogador: " + jogadorAtual.getNomeJogador());
+            System.out.println("Digite sua jogada ou salvar (para salvar e sair)");
 
-            if (jogada.equals("salvar")) {
-                salvarJogo();
-                return;
-            }
+            String entrada = ler.nextLine();
 
-            if (ehValida(jogada)) {
+            if (entrada.equals("salvar")) {
                 
+                jogoFinalizado = true;
             } else {
-                System.out.println("Jogada inválida");
+                int linhaO = Character.getNumericValue(entrada.charAt(0))-1;
+                int colunaO = entrada.charAt(1) - 'a';
+
+                int linhaD = Character.getNumericValue(entrada.charAt(2))-1;
+                int colunaD = entrada.charAt(3) - 'a';
+                
+
+                Jogada jogada = new Jogada(jogadorAtual, jogadorAdversario, tabuleiro.getCasa(linhaO, colunaO), tabuleiro.getCasa(linhaD, colunaD));
+
+                System.out.println(linhaO + " ");
+                System.out.println(colunaO + " ");
+                System.out.println(linhaD + " ");
+                System.out.println(colunaD + " ");
+
+                if (jogadorAtual.getNomeJogador().equals(jogador1.getNomeJogador())) {
+                    jogadorAtual = jogador2;
+                    jogadorAdversario = jogador1;
+                } else {
+                    jogadorAtual = jogador1;
+                    jogadorAdversario = jogador2;
+                }
             }
+
+            /* 
+            if (jogada.equals("salvar")) {
+                //salvarJogo();
+                return;
+            } else {
+                
+
+                //Casa casaO = new Casa(jogada, 0, 0, jogoFinalizado, null)
+                //Jogada jogada = new Jogada(jogadorAtual, linha, coluna)
+           }
+             */
         }
         System.err.println("Jogo finalizado");
+
     }
-     */
 }

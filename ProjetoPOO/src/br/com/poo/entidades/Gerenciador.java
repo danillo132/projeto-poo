@@ -9,38 +9,43 @@ import java.util.Scanner;
 public class Gerenciador {
 
     public static void main(String[] args) {
-        testesDesenvolvimento();
+        Gerenciador gerenciador = new Gerenciador();
+        gerenciador.menu();        
     }
 
     private Jogo jogo;
     Scanner ler = new Scanner(System.in);
 
-//    public void menu() {
-//        while (true) {
-//            System.out.println("Bem vindo!");
-//            System.out.println("Escolha uma das opcoes abaixo:");
-//            System.out.println("1 - iniciar novo jogo");
-//            System.out.println("2 - Carregar um jogo salvo");
-//            System.out.println("3 - Sair");
-//
-//            int opcao = ler.nextInt();
-//
-//            if (opcao == 1) {
-//                novoJogo();
-//                jogo.iniciarJogo();
-//            }
-//            if (opcao == 2) {
-//                carregarJogo();
-//            }
-//            if (opcao == 3) {
-//                System.err.println("Encerrando...\n");
-//                return;
-//            }
-//        }
-//
-//    }
+    public void menu() {
+
+        while (true) {
+            System.out.println("Bem vindo!");
+            System.out.println("Escolha uma das opcoes abaixo:");
+            System.out.println("1 - iniciar novo jogo");
+            System.out.println("2 - Carregar um jogo salvo");
+            System.out.println("3 - Sair");
+
+            int opcao = ler.nextInt();
+
+            if (opcao == 1) {
+                Jogo jogo1 = new Jogo();
+                jogo.iniciarJogo();               
+            }
+            if (opcao == 2) {
+                carregarJogo();
+            }
+            if (opcao == 3) {
+                System.err.println("Encerrando...\n");
+                return;
+            }
+        }
+
+    }
+
+
 
     private static void testesDesenvolvimento() {
+
         /**
          * Método responsável pelos testes exaustivos durante o desenvolvimento
          */
@@ -63,12 +68,16 @@ public class Gerenciador {
 //    	Peça cavalo = new Cavalo("white");
 //    	System.out.println( cavalo.caminho(4, 'b', 5, 'd'));
     	
+
+
     }
 
-//    public void novoJogo() {
-//        jogo = new Jogo();
-//        jogo.iniciarJogo();
-//    }
+/* 
+    public void novoJogo() {
+        jogo = new Jogo();
+        jogo.iniciarJogo();
+    }
+*/
 
     public void carregarJogo() {
 

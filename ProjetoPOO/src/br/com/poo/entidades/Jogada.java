@@ -1,7 +1,6 @@
 package br.com.poo.entidades;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 public class Jogada {
@@ -22,9 +21,9 @@ public class Jogada {
 		caminho = new Caminho(posicaoInicial, posicaoFinal);
 	}
 
+
 	public boolean ehValida(Tabuleiro tabuleiro, Jogador jogadorDoTurno) {
 		String corPeçasJogador = jogadorDoTurno.getPeças().get(0).getCor();
-		
 		if (tabuleiro.noLimite(posicaoInicial.getLinha(), posicaoInicial.getColuna())
 				&& tabuleiro.noLimite(posicaoFinal.getLinha(), posicaoFinal.getColuna())) {
 			if (caminho.casaInicial().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
