@@ -142,4 +142,17 @@ public class Jogo {
         System.err.println("Jogo finalizado");
 
     }
+
+    public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD){
+        char colunas[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+        
+        if(!(tabuleiro.noLimite(linhaO, colunas[colunaO-1]) && tabuleiro.noLimite(linhaD, colunas[colunaD-1])))
+            return false;
+        else{
+            Casa origem = tabuleiro.getCasa(linhaO, colunaO);
+            Casa destino = tabuleiro.getCasa(linhaD, colunaD);
+            
+            if()
+        }
+    }
 }
