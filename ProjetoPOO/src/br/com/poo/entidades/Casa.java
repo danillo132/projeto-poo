@@ -49,6 +49,9 @@ public class Casa {
 	public boolean isOcupada() {
 		return ocupada;
 	}
+	public void ocuparCasa() {
+		this.ocupada = true;
+	}
 
 	/**
 	 * Método que realiza a adição da peça à casa de forma direta

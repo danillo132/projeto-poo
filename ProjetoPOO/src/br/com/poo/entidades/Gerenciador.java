@@ -1,5 +1,7 @@
 package br.com.poo.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,7 +11,7 @@ import java.util.Scanner;
 public class Gerenciador {
 
 	public static void main(String[] args) {
-		testesDesenvolvimento();
+//		testesDesenvolvimento();
 		Gerenciador gerenciador = new Gerenciador();
 		gerenciador.menu();
 	}
@@ -47,19 +49,22 @@ public class Gerenciador {
 	 * Método responsável pelos testes exaustivos durante o desenvolvimento
 	 */
 	private static void testesDesenvolvimento() {
-
+		List<Peça> pecasJogador1 = new ArrayList<>();
+		
+		List<Peça> pecasJogador2 = new ArrayList<>();
 		
 
 		System.out.println("=======Peças Brancas======");
 		Peça torreB = new Torre("white");
 		System.out.println("Peça: " + torreB.desenho() + " caminho: " + torreB.caminho(4, 'b', 4, 'g'));
+		torreB.setInGame(false);
 
 		Peça reiB = new Rei("white");
 		System.out.println("Peça: " + reiB.desenho() + " caminho: " + reiB.caminho(2, 'd', 3, 'e'));
 
 		Peça bispoB = new Bispo("white");
 		System.out.println("Peça: " + bispoB.desenho() + " caminho: " + bispoB.caminho(3, 'c', 5, 'a'));
-
+		bispoB.setInGame(false);
 		Peça damaB = new Dama("white");
 		System.out.println("Peça: " + damaB.desenho() + " caminho: " + damaB.caminho(2, 'c', 6, 'g'));
 
@@ -68,6 +73,14 @@ public class Gerenciador {
 
 		Peça cavaloB = new Cavalo("white");
 		System.out.println("Peça: " + cavaloB.desenho() + " caminho: " + cavaloB.caminho(2, 'a', 1, 'c'));
+		pecasJogador1.add(torreB);
+		pecasJogador1.add(reiB);
+		pecasJogador1.add(cavaloB);
+		pecasJogador1.add(bispoB);
+		pecasJogador1.add(damaB);
+		pecasJogador1.add(peaoB);
+		
+		
 		System.out.println("============================");
 
 		System.out.println("=======Peças Pretas======");
@@ -88,7 +101,38 @@ public class Gerenciador {
 
 		Peça cavaloP = new Cavalo("preto");
 		System.out.println("Peça: " + cavaloP.desenho() + " caminho: " + cavaloP.caminho(2, 'a', 1, 'y'));
+		cavaloP.setInGame(false);;
+		pecasJogador2.add(torreP);
+		pecasJogador2.add(reiP);
+		pecasJogador2.add(cavaloP);
+		pecasJogador2.add(bispoP);
+		pecasJogador2.add(damaP);
+		pecasJogador2.add(peaoP);
 		System.out.println("============================");
+		 
+		
+		Jogador jogador1 = new Jogador("Marcos", pecasJogador1);
+		System.out.println("Nome jogador 1: "+ jogador1.getNomeJogador()); 
+		System.out.println("Peças capturadas: "+ jogador1.pecasCapturadas()); 
+		
+		Jogador jogador2 = new Jogador("Pedro", pecasJogador2);
+		String jogada1 = jogador1.informaJogada();
+		
+		String[] formatarJogada = jogada1.split("");
+		for (int i = 0; i < formatarJogada.length; i += 2) {
+			if (formatarJogada[i] != null && formatarJogada[i + 1] != null) {
+				int linha = Integer.parseInt(formatarJogada[i]);
+				char coluna = formatarJogada[i + 1].charAt(0);
+				Casa posicaoInicial = new Casa(bispoB.getCor() ,linha, coluna, true, bispoB);
+				Casa posicaoFinal = new Casa(bispoB.getCor() ,linha, coluna, true, bispoB);
+			}
+		}
+		
+				
+		System.out.println("Nome jogador 2: "+ jogador1.getNomeJogador()); 
+		System.out.println("Peças capturadas: "+ jogador1.pecasCapturadas()); 
+		
+		Jogada jogada = new Jogada(jogador1, jogador2, null, null);
 
 	}
 
@@ -98,6 +142,10 @@ public class Gerenciador {
 
 	public void carregarJogo() {
 
+	}
+	
+	public void salvarJogo() {
+		
 	}
 
 }

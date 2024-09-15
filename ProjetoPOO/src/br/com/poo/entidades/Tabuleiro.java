@@ -20,9 +20,9 @@ public class Tabuleiro {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if ((i + j) % 2 == 0) {
-					tabuleiro[i][j] = new Casa("B", i, colunas[i], false, null);
+					tabuleiro[i][j] = new Casa("B", i, colunas[j], false, null);
 				} else {
-					tabuleiro[i][j] = new Casa("P", i, colunas[i], false, null);
+					tabuleiro[i][j] = new Casa("P", i, colunas[j], false, null);
 				}
 			}
 		}
@@ -36,6 +36,7 @@ public class Tabuleiro {
 	 */
 	public void setPeça(int linha, int coluna, Peça peça) {
 		this.tabuleiro[linha][coluna].setPeça(peça);
+		this.tabuleiro[linha][coluna].ocuparCasa();
 	}
 
 	/**

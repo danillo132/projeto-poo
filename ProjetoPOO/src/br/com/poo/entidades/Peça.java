@@ -29,13 +29,18 @@ public abstract class Peça {
 	 * @param inGame Atributo que diz se a peça ainda está no jogo (false ou true)
 	 */
 	public Peça(String tipo, String cor, boolean inGame) {
-		if (cor.equals("preto")) {
+		if (cor.equals("preta")) {
 			this.tipo = "\u001B[31m" + tipo + "\u001B[0m";
 		} else {
 			this.tipo = tipo;
 		}
 
 		this.cor = cor;
+		this.inGame = inGame;
+	}
+	
+	
+	public void setInGame(boolean inGame) {
 		this.inGame = inGame;
 	}
 

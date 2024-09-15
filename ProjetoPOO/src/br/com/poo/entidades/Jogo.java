@@ -19,6 +19,7 @@ public class Jogo {
 	private Jogador jogadorAtual;
 	private Jogador jogadorAdversario;
 	private List<String> historicoJogadas;
+	private List<Jogada> jogadas;
 	private boolean jogoFinalizado;
 
 	/**
@@ -33,6 +34,7 @@ public class Jogo {
 
 		this.peçasBrancas = new ArrayList<>();
 		this.peçasPretas = new ArrayList<>();
+		this. jogadas = new ArrayList<>();
 
 		inicializarPeças();
 
@@ -89,7 +91,7 @@ public class Jogo {
 		peçasPretas.add(new Torre("preta"));
 
 		for (int i = 0; i < 8; i++) {
-			peçasPretas.add(new Peão("branco"));
+			peçasPretas.add(new Peão("preta"));
 		}
 
 		for (int i = 0; i < 8; i++) {
@@ -109,20 +111,22 @@ public class Jogo {
 	 */
 	public void iniciarJogo() {
 		while (!jogoFinalizado) {
+			System.out.println(this.tabuleiro.desenho()); 
 			System.out.println("Vez do jogador: " + jogadorAtual.getNomeJogador());
 			System.out.println("Digite sua jogada ou salvar (para salvar e sair)");
 
-			String entrada = ler.nextLine();
+			String entrada = jogadorAtual.informaJogada();
 
 			if (entrada.equals("salvar")) {
 
 				jogoFinalizado = true;
 			} else {
-				int linhaO = Character.getNumericValue(entrada.charAt(0)) - 1;
+				int linhaO = 8 - Character.getNumericValue(entrada.charAt(0));
 				int colunaO = entrada.charAt(1) - 'a';
 
-				int linhaD = Character.getNumericValue(entrada.charAt(2)) - 1;
+				int linhaD = 8- Character.getNumericValue(entrada.charAt(2));
 				int colunaD = entrada.charAt(3) - 'a';
+				
 
 				Jogada jogada = new Jogada(jogadorAtual, jogadorAdversario, tabuleiro.getCasa(linhaO, colunaO),
 						tabuleiro.getCasa(linhaD, colunaD));
@@ -161,7 +165,7 @@ public class Jogo {
 	 * @param colunaD
 	 * @return
 	 */
-	public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD) {
+	public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD, Jogada jogada) {
 		char colunas[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
 
 		if (!(tabuleiro.noLimite(linhaO, colunas[colunaO - 1]) && tabuleiro.noLimite(linhaD, colunas[colunaD - 1]))) {
