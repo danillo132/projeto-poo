@@ -40,8 +40,8 @@ public class Jogada {
 				if (casaFinal.getPeça() == null
 						|| !caminho.casaFinal().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
 					if (caminho.estaLivre() || casaInicial.getPeça().getTipo().equalsIgnoreCase("C")) {
-						if (casaInicial.getPeça().movimentoValido(casaInicial.getColuna(),
-								casaInicial.getColuna(), casaFinal.getColuna(), casaFinal.getColuna())) {
+						if (casaInicial.getPeça().movimentoValido(casaInicial.getLinha(),
+								casaInicial.getColuna(), casaFinal.getLinha(), casaFinal.getColuna())) {
 							return true;
 						}
 						return false;

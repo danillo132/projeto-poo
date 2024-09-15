@@ -39,13 +39,16 @@ public class Caminho {
 			for (int i = 0; i < partesCaminho.length; i += 2) {
 				if (partesCaminho[i] != null && partesCaminho[i + 1] != null) {
 					int linha = Integer.parseInt(partesCaminho[i]);
-					char coluna = partesCaminho[i + 1].charAt(0);
+					int coluna = partesCaminho[i + 1].charAt(0) - 'a';
 					if (tabuleiro.getTabuleiro()[linha][coluna] != null) {
-						Casa casaNoTabuleiro = tabuleiro.getTabuleiro()[linha][coluna];
+						Casa casaNoTabuleiro = tabuleiro.getCasa(linha, coluna);
 
-						Casa novaCasa = new Casa(casaNoTabuleiro.getCor(), linha, coluna, casaNoTabuleiro.isOcupada(),
-								casaNoTabuleiro.getPeça());
-						sequenciaDeCasas.add(novaCasa);
+//						Casa novaCasa = new Casa(casaNoTabuleiro.getCor(), linha,(char) (coluna + 'a'), casaNoTabuleiro.isOcupada(),
+//								casaNoTabuleiro.getPeça());
+						if(!sequenciaDeCasas.contains(casaNoTabuleiro)) {
+							sequenciaDeCasas.add(casaNoTabuleiro);
+						}
+						
 					}
 
 				}

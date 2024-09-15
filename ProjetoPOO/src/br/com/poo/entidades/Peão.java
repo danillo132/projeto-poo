@@ -37,7 +37,7 @@ public class Peão extends Peça {
 
 		boolean captura = (difColuna == 1 && difLinha == 1);
 
-		boolean sentidoCorreto = (!getCor().equalsIgnoreCase("black") ? linhaO < linhaD : linhaO > linhaD);
+		boolean sentidoCorreto = (!getCor().equalsIgnoreCase("preta") ? linhaD < linhaO : linhaD > linhaO);
 
 		return (movimentoNormal || captura) && sentidoCorreto;
 	}

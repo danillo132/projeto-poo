@@ -73,7 +73,7 @@ public class Jogo {
 		peçasBrancas.add(new Torre("branca"));
 
 		for (int i = 0; i < 8; i++) {
-			peçasBrancas.add(new Peão("branco"));
+			peçasBrancas.add(new Peão("branca"));
 		}
 
 		for (int i = 0; i < 8; i++) {
@@ -130,6 +130,8 @@ public class Jogo {
 
 				Jogada jogada = new Jogada(jogadorAtual, jogadorAdversario, tabuleiro.getCasa(linhaO, colunaO),
 						tabuleiro.getCasa(linhaD, colunaD));
+				System.out.println(jogada.ehValida(tabuleiro, jogador1, tabuleiro.getCasa(linhaO, colunaO),
+						tabuleiro.getCasa(linhaD, colunaD)));
 
 				System.out.println(linhaO + " ");
 				System.out.println(colunaO + " ");
