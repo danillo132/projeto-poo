@@ -132,7 +132,12 @@ public class Jogo {
 						tabuleiro.getCasa(linhaD, colunaD));
 				System.out.println(jogada.ehValida(tabuleiro, jogador1, tabuleiro.getCasa(linhaO, colunaO),
 						tabuleiro.getCasa(linhaD, colunaD)));
-
+				
+				tabuleiro.getCasa(linhaD, colunaD).setPeça(tabuleiro.getCasa(linhaO, colunaO).getPeça());
+				tabuleiro.getCasa(linhaO, colunaO).setPeça(null);
+				
+				
+				tabuleiro.desenho();
 				System.out.println(linhaO + " ");
 				System.out.println(colunaO + " ");
 				System.out.println(linhaD + " ");
