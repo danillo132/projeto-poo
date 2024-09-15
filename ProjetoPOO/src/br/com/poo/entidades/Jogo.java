@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Classe que manipula todo o jogo
+ */
 public class Jogo {
 
 	Scanner ler = new Scanner(System.in);
@@ -18,6 +21,9 @@ public class Jogo {
 	private List<String> historicoJogadas;
 	private boolean jogoFinalizado;
 
+	/**
+	 * Construtor responsável por criar os dois jogadores da partida e o tabuleiro contendo as peças em formação inicial
+	 */
 	public Jogo() {
 		// Cria dois jogadores
 		// Cria um tabuleiro
@@ -50,6 +56,9 @@ public class Jogo {
 
 	}
 
+	/**
+	 * Método que realiza a formação inicial das peças brancas e pretas do tabuleiro 
+	 */
 	public void inicializarPeças() {
 
 		peçasBrancas.add(new Torre("branca"));
@@ -94,6 +103,10 @@ public class Jogo {
 	// colunaD){}
 	// public void realizaJogada(int linhaO, int colunaO, int linhaD, int colunaD){}
 	// public String registroJogo();
+	
+	/**
+	 * Método que realiza a inicialização do jogo
+	 */
 	public void iniciarJogo() {
 		while (!jogoFinalizado) {
 			System.out.println("Vez do jogador: " + jogadorAtual.getNomeJogador());
@@ -140,6 +153,14 @@ public class Jogo {
 
 	}
 
+	/**
+	 * Método que chama a validação da jogada 
+	 * @param linhaO
+	 * @param colunaO
+	 * @param linhaD
+	 * @param colunaD
+	 * @return
+	 */
 	public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD) {
 		char colunas[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h' };
 
@@ -169,6 +190,8 @@ public class Jogo {
 			// Verificar se o caminho está livre, exceto para cavalos
 
 		}
+		
+		
 		return true;
 	}
 }

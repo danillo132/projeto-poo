@@ -1,13 +1,16 @@
 package br.com.poo.entidades;
 
-/*
- Tabuleiro
+/**
+ * Classe que define o tabuleiro do jogo
  */
 public class Tabuleiro {
 
 	private Casa[][] tabuleiro;
 	private String desenho;
 
+	/**
+	 * Construtor que realiza a construção de um tabuleiro 8x8 com linhas númericas e colunas alfabéticas
+	 */
 	public Tabuleiro() {
 		this.tabuleiro = new Casa[8][8];
 
@@ -25,14 +28,30 @@ public class Tabuleiro {
 		}
 	}
 
+	/**
+	 * Método responsável por adicionar manualmente uma peça em uma casa do tabuleiro
+	 * @param linha
+	 * @param coluna
+	 * @param peça
+	 */
 	public void setPeça(int linha, int coluna, Peça peça) {
 		this.tabuleiro[linha][coluna].setPeça(peça);
 	}
 
+	/**
+	 * Método responsável por verificar se a linha e a coluna fornecida ultrapassa as definições do tabuleiro
+	 * @param linha  
+	 * @param coluna
+	 * @return
+	 */
 	public boolean noLimite(int linha, char coluna) {
 		return (coluna >= 'a' && coluna <= 'h') && (linha >= 1 && linha <= 8);
 	}
 
+	/**
+	 * Método responsável por desenhar o tabuleiro com cores e as peças 
+	 * @return tabuleiro desenhado 
+	 */
 	public String desenho() {
 		String ANSI_YELLOW = "\u001B[33m";
 		String ANSI_RESET = "\u001B[0m";
@@ -59,10 +78,20 @@ public class Tabuleiro {
 		return desenho.toString();
 	}
 
+	/**
+	 * Método responsável por retornar todas as casas do tabuleiro 
+	 * @return matriz de casas do tabuleiro
+	 */
 	public Casa[][] getTabuleiro() {
 		return tabuleiro;
 	}
 
+	/**
+	 * Método responsável por retornar uma casa específica do tabuleiro
+	 * @param linha linha da casa
+	 * @param coluna coluna da casa
+	 * @return
+	 */
 	public Casa getCasa(int linha, int coluna) {
 		return tabuleiro[linha][coluna];
 	}

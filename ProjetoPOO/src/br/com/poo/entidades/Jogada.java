@@ -10,8 +10,6 @@ public class Jogada {
 
 	private Jogador jogador;
 	private Jogador jogadorAdversario;
-	private Casa posicaoInicial;
-	private Casa posicaoFinal;
 	private Caminho caminho;
 
 	/**
@@ -24,8 +22,6 @@ public class Jogada {
 	public Jogada(Jogador jogador, Jogador jogadorAdversario, Casa posicaoInicial, Casa posicaoFinal) {
 		this.jogador = jogador;
 		this.jogadorAdversario = jogadorAdversario;
-		this.posicaoInicial = posicaoInicial;
-		this.posicaoFinal = posicaoFinal;
 		caminho = new Caminho(posicaoInicial, posicaoFinal);
 	}
 
@@ -35,17 +31,17 @@ public class Jogada {
 	 * @param jogadorDoTurno Jogador que está realizando a jogada nesse turno
 	 * @return true se a jogada pode ser feita ou false caso não seja válida
 	 */
-	public boolean ehValida(Tabuleiro tabuleiro, Jogador jogadorDoTurno) {
+	public boolean ehValida(Tabuleiro tabuleiro, Jogador jogadorDoTurno, Casa casaInicial, Casa casaFinal) {
 		caminho.populaCaminho(tabuleiro);
 		String corPeçasJogador = jogadorDoTurno.getPeças().get(0).getCor();
-		if (tabuleiro.noLimite(posicaoInicial.getLinha(), posicaoInicial.getColuna())
-				&& tabuleiro.noLimite(posicaoFinal.getLinha(), posicaoFinal.getColuna())) {
+		if (tabuleiro.noLimite(casaInicial.getLinha(), casaInicial.getColuna())
+				&& tabuleiro.noLimite(casaFinal.getLinha(), casaFinal.getColuna())) {
 			if (caminho.casaInicial().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
-				if (posicaoFinal.getPeça() == null
+				if (casaFinal.getPeça() == null
 						|| !caminho.casaFinal().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
-					if (caminho.estaLivre() || posicaoInicial.getPeça().getTipo().equalsIgnoreCase("C")) {
-						if (posicaoInicial.getPeça().movimentoValido(posicaoInicial.getColuna(),
-								posicaoInicial.getColuna(), posicaoFinal.getColuna(), posicaoFinal.getColuna())) {
+					if (caminho.estaLivre() || casaInicial.getPeça().getTipo().equalsIgnoreCase("C")) {
+						if (casaInicial.getPeça().movimentoValido(casaInicial.getColuna(),
+								casaInicial.getColuna(), casaFinal.getColuna(), casaFinal.getColuna())) {
 							return true;
 						}
 						return false;
@@ -103,7 +99,7 @@ public class Jogada {
 
 		for (Casa casaComPeçaAdversaria : getCasasComPeçasAdversarias(tabuleiro)) {
 			Jogada jogadaHipotetica = new Jogada(jogador, jogadorAdversario, casaComPeçaAdversaria, casaDoRei);
-			if (jogadaHipotetica.ehValida(tabuleiro, jogadorAdversario)) {
+			if (jogadaHipotetica.ehValida(tabuleiro, jogadorAdversario, casaComPeçaAdversaria, casaDoRei)) {
 				return true;
 			}
 		}
@@ -158,7 +154,7 @@ public class Jogada {
 				Casa novaCasa = tabuleiro.getTabuleiro()[novaLinha][novaColuna];
 				Jogada jogadaHipotetica = new Jogada(jogador, jogadorAdversario, casaDoRei, novaCasa);
 
-				if (jogadaHipotetica.ehValida(tabuleiro, jogador)) {
+				if (jogadaHipotetica.ehValida(tabuleiro, jogador, casaDoRei, novaCasa)) {
 
 					Peça rei = casaDoRei.getPeça();
 					novaCasa.setPeça(rei);
