@@ -3,6 +3,9 @@ package br.com.poo.entidades;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase referente a jogada que é realizada por um dos jogadores
+ */
 public class Jogada {
 
 	private Jogador jogador;
@@ -11,9 +14,14 @@ public class Jogada {
 	private Casa posicaoFinal;
 	private Caminho caminho;
 
-
-
-	public Jogada(Jogador jogador,Jogador jogadorAdversario, Casa posicaoInicial, Casa posicaoFinal) {
+	/**
+	 * Construtor que adiciona o jogador atual, o jogador adversário, a casa inicial da jogada e a casa final da jogada
+	 * @param jogador jogador atual
+	 * @param jogadorAdversario jogador adversário
+	 * @param posicaoInicial casa inicial da jogada
+	 * @param posicaoFinal casa final da jogada
+	 */
+	public Jogada(Jogador jogador, Jogador jogadorAdversario, Casa posicaoInicial, Casa posicaoFinal) {
 		this.jogador = jogador;
 		this.jogadorAdversario = jogadorAdversario;
 		this.posicaoInicial = posicaoInicial;
@@ -21,14 +29,20 @@ public class Jogada {
 		caminho = new Caminho(posicaoInicial, posicaoFinal);
 	}
 
-
+	/**
+	 * Método que realiza validações da jogada para verificar se é válida 
+	 * @param tabuleiro tabuleiro do jogo
+	 * @param jogadorDoTurno Jogador que está realizando a jogada nesse turno
+	 * @return true se a jogada pode ser feita ou false caso não seja válida
+	 */
 	public boolean ehValida(Tabuleiro tabuleiro, Jogador jogadorDoTurno) {
 		caminho.populaCaminho(tabuleiro);
 		String corPeçasJogador = jogadorDoTurno.getPeças().get(0).getCor();
 		if (tabuleiro.noLimite(posicaoInicial.getLinha(), posicaoInicial.getColuna())
 				&& tabuleiro.noLimite(posicaoFinal.getLinha(), posicaoFinal.getColuna())) {
 			if (caminho.casaInicial().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
-				if (posicaoFinal.getPeça() == null || !caminho.casaFinal().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
+				if (posicaoFinal.getPeça() == null
+						|| !caminho.casaFinal().getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
 					if (caminho.estaLivre() || posicaoInicial.getPeça().getTipo().equalsIgnoreCase("C")) {
 						if (posicaoInicial.getPeça().movimentoValido(posicaoInicial.getColuna(),
 								posicaoInicial.getColuna(), posicaoFinal.getColuna(), posicaoFinal.getColuna())) {
@@ -45,14 +59,25 @@ public class Jogada {
 		return false;
 	}
 
+	/**
+	 * Método que verifica se o Rei do jogador do turno está em situação de xeque
+	 * @param tabuleiro tabuleiro do jogo
+	 * @return retorna true se o rei está em xeque ou false caso não esteja 
+	 */
 	public boolean ehXeque(Tabuleiro tabuleiro) {
-		  boolean reiEmXeque = estaReiEmXeque(tabuleiro);
-		    if (!reiEmXeque) {
-		        return false;
-		    }
-		    return reiEmXeque;
+		boolean reiEmXeque = estaReiEmXeque(tabuleiro);
+		if (!reiEmXeque) {
+			return false;
+		}
+		return reiEmXeque;
 	}
 
+	/**
+	 * Método que verifica se  o rei do jogador do turno está em situação de xeque-mate
+	 * @param tabuleiro tabuleiro do jogo
+	 * @return abuleiro tabuleiro do jogo
+	 * @return retorna true se o rei está em xeque-mate ou false caso não esteja 
+	 */
 	public boolean ehXequeMate(Tabuleiro tabuleiro) {
 
 		boolean reiEmXeque = estaReiEmXeque(tabuleiro);
@@ -60,11 +85,16 @@ public class Jogada {
 		if (!reiEmXeque) {
 			return false;
 		}
-		  Peça rei = encontrarCasaDoRei(tabuleiro).getPeça();
-		    boolean xequeMate = getPossiveisJogadas(rei, tabuleiro);
+		Peça rei = encontrarCasaDoRei(tabuleiro).getPeça();
+		boolean xequeMate = getPossiveisJogadas(rei, tabuleiro);
 		return xequeMate;
 	}
 
+	/**
+	 * Método privado que simula as jogadas com todas as peças adversárias que podem deixar o rei do jogador do turno em xeque
+	 * @param tabuleiro tabuleiro do jogo
+	 * @return retorna true se alguma jogada deixou o rei em xeque ou não caso não tenha jogada que o deixou em xeque
+	 */
 	private boolean estaReiEmXeque(Tabuleiro tabuleiro) {
 		Casa casaDoRei = encontrarCasaDoRei(tabuleiro);
 		if (casaDoRei == null) {
@@ -81,6 +111,11 @@ public class Jogada {
 		return false;
 	}
 
+	/**
+	 * Método responsável pela busca da casa do rei do jogador do turno no tabuleiro
+	 * @param tabuleiro tabuleiro do jog
+	 * @return casa em que o rei se encontra
+	 */
 	private Casa encontrarCasaDoRei(Tabuleiro tabuleiro) {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
@@ -92,54 +127,61 @@ public class Jogada {
 		}
 		return null;
 	}
-	
+
+	/*
+	 * Método que simula as possíveis jogadas que o jogador do turno pode fazer com o seu rei para tirá-lo da situação de xeque
+	 */
 	private boolean getPossiveisJogadas(Peça peça, Tabuleiro tabuleiro) {
-	    if (peça == null) {
-	        return false; 
-	    }
+		if (peça == null) {
+			return false;
+		}
 
-	    Casa casaDoRei = encontrarCasaDoRei(tabuleiro);
-	    if (casaDoRei == null) {
-	        return false;
-	    }
+		Casa casaDoRei = encontrarCasaDoRei(tabuleiro);
+		if (casaDoRei == null) {
+			return false;
+		}
 
-	    int[] direcoes = {-1, 0, 1};
-	    for (int dx : direcoes) {
-	        for (int dy : direcoes) {
-	            if (dx == 0 && dy == 0) {
-	            	continue;
-	            }
+		int[] direcoes = { -1, 0, 1 };
+		for (int horizontal : direcoes) {
+			for (int vertical : direcoes) {
+				if (horizontal == 0 && vertical == 0) {
+					continue;
+				}
 
-	            int novaLinha = casaDoRei.getLinha() + dx;
-	            int novaColuna = casaDoRei.getColuna() - dy;
+				int novaLinha = casaDoRei.getLinha() + horizontal;
+				int novaColuna = casaDoRei.getColuna() - vertical;
 
-	            if (!tabuleiro.noLimite(novaLinha, (char) novaColuna)) {
-	                continue;
-	            }
+				if (!tabuleiro.noLimite(novaLinha, (char) novaColuna)) {
+					continue;
+				}
 
-	            Casa novaCasa = tabuleiro.getTabuleiro()[novaLinha][novaColuna];
-	            Jogada jogadaHipotetica = new Jogada(jogador, jogadorAdversario, casaDoRei, novaCasa);
+				Casa novaCasa = tabuleiro.getTabuleiro()[novaLinha][novaColuna];
+				Jogada jogadaHipotetica = new Jogada(jogador, jogadorAdversario, casaDoRei, novaCasa);
 
-	            if (jogadaHipotetica.ehValida(tabuleiro, jogador)) {
-	
-	                Peça rei = casaDoRei.getPeça();
-	                novaCasa.setPeça(rei);
-	                casaDoRei.setPeça(null);
+				if (jogadaHipotetica.ehValida(tabuleiro, jogador)) {
 
-	              
-	                boolean reiAindaEmXeque = estaReiEmXeque(tabuleiro);
-	                if (!reiAindaEmXeque) {
-	                    return false; 
-	                }
-	                casaDoRei.setPeça(rei);
-	                novaCasa.setPeça(null);
-	            }
-	        }
-	    }
+					Peça rei = casaDoRei.getPeça();
+					novaCasa.setPeça(rei);
+					casaDoRei.setPeça(null);
 
-	    return true; 
+					boolean reiAindaEmXeque = estaReiEmXeque(tabuleiro);
+					if (!reiAindaEmXeque) {
+						return false;
+					}
+					casaDoRei.setPeça(rei);
+					novaCasa.setPeça(null);
+				}
+			}
+		}
+
+		return true;
 	}
 
+	/**
+	 * Método que retorna todas as casas que estão preenchidas com peças adversárias
+	 * @param tabuleiro tabuleiro do jogo
+	 * @return Lista de casas com peças adversárias 
+	 */
 	private List<Casa> getCasasComPeçasAdversarias(Tabuleiro tabuleiro) {
 		List<Casa> adversarios = new ArrayList<>();
 		String corPeçasJogador = jogador.getPeças().get(0).getCor();

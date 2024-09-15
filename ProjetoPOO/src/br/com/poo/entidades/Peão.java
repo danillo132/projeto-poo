@@ -1,21 +1,35 @@
 package br.com.poo.entidades;
 
+/**
+ * Classe derivada de Peça que representa a peça de xadrez peão
+ */
 public class Peão extends Peça {
 
+	/**
+	 * Construtor que recebe a cor da peça e faz a chamada ao construtor da classe Base para iniciar os atributos tipo, cor e inGame
+	 * @param cor
+	 */
 	public Peão(String cor) {
 		super("P", cor, true);
 	}
 
+	/**
+	 * Implementação do método desenho que retorna o tipo de peça (peão)
+	 */
 	@Override
-	public String desenho() {
-		if (this.getCor().equals("preto"))
-			return "\u001B[31m" + "P" + "\u001B[0m";
-		else
-			return "P";
+	String desenho() {
+		return this.tipo;
 	}
 
+	/**
+	 * Implementação do método que verifica se o movimento é válido para o peão
+	 * @param linhaO   Linha correspondente a posição inicial
+	 * @param colunaO Coluna correspondente a posição inicial 
+	 * @param linhaD Linha correspondente a posição final
+	 * @param colunaD Coluna correspondente a posição final
+	 */
 	@Override
-	boolean movimentoValido(int linhaO, char colunaO, int linhaD, char colunaD) {
+	protected boolean movimentoValido(int linhaO, char colunaO, int linhaD, char colunaD) {
 		int difColuna = Math.abs(colunaO - colunaD);
 		int difLinha = Math.abs(linhaO - linhaD);
 
@@ -28,8 +42,15 @@ public class Peão extends Peça {
 		return (movimentoNormal || captura) && sentidoCorreto;
 	}
 
+	/**
+	 * Implementação do método caminho que chama verificação de movimento válido e monta o caminho com base na posição inicial e final
+	 * @param linhaO   Linha correspondente a posição inicial
+	 * @param colunaO Coluna correspondente a posição inicial 
+	 * @param linhaD Linha correspondente a posição final
+	 * @param colunaD Coluna correspondente a posição final
+	 */
 	@Override
-	String caminho(int linhaO, char colunaO, int linhaD, char colunaD) {
+	protected String caminho(int linhaO, char colunaO, int linhaD, char colunaD) {
 		if (this.movimentoValido(linhaO, colunaO, linhaD, colunaD)) {
 			StringBuilder caminho = new StringBuilder();
 			caminho.append(linhaO).append(colunaO);

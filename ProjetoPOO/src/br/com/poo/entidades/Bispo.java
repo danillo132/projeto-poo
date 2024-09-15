@@ -1,35 +1,55 @@
 package br.com.poo.entidades;
 
+/**
+ * Classe derivada de Peça que representa a peça de xadrez bispo
+ */
 public class Bispo extends Peça {
 
+	/**
+	 * Construtor que recebe a cor da peça e faz a chamada ao construtor da classe Base para iniciar os atributos tipo, cor e inGame
+	 * @param cor
+	 */
 	public Bispo(String cor) {
 		super("B", cor, true);
 	}
 
+	/**
+	 * Implementação do método desenho que retorna o tipo de peça (bispo)
+	 */
 	@Override
-	public String desenho() {
-		if (this.getCor().equals("preto"))
-			return "\u001B[31m" + "B" + "\u001B[0m";
-		else
-			return "B";
+	String desenho() {
+		return this.tipo;
 	}
 
+	/**
+	 * Implementação do método que verifica se o movimento é válido para o bispo
+     * @param linhaO   Linha correspondente a posição inicial
+	 * @param colunaO Coluna correspondente a posição inicial 
+	 * @param linhaD Linha correspondente a posição final
+	 * @param colunaD Coluna correspondente a posição final
+	 */
 	@Override
-	boolean movimentoValido(int linhaO, char colunaO, int linhaD, char colunaD) {
+	protected boolean movimentoValido(int linhaO, char colunaO, int linhaD, char colunaD) {
 		int diferencaColuna = Math.abs(colunaO - colunaD);
 		int diferencaLinha = Math.abs(linhaO - linhaD);
 
 		return diferencaColuna == diferencaLinha;
 	}
 
+	/**
+	 * Implementação do método caminho que chama verificação de movimento válido e monta o caminho com base na posição inicial e final
+	 * @param linhaO   Linha correspondente a posição inicial
+	 * @param colunaO Coluna correspondente a posição inicial 
+	 * @param linhaD Linha correspondente a posição final
+	 * @param colunaD Coluna correspondente a posição final
+	 */
 	@Override
-	String caminho(int linhaO, char colunaO, int linhaD, char colunaD) {
+	protected String caminho(int linhaO, char colunaO, int linhaD, char colunaD) {
 		if (this.movimentoValido(linhaO, colunaO, linhaD, colunaD)) {
 			StringBuilder caminho = new StringBuilder();
 			int linhaAtual = linhaO;
 			int colunaAtual = colunaO;
 
-			// Converte coluna de char para int para facilitar o cálculo
 			int colunaAtualInt = colunaAtual - 'a';
 			int colunaDestinoInt = colunaD - 'a';
 

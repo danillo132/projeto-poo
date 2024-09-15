@@ -1,79 +1,96 @@
 package br.com.poo.entidades;
 
+/**
+ * Classe derivada de Peça que representa a peça de xadrez dama
+ */
 public class Dama extends Peça {
 
-    public Dama(String cor) {
-        super("D", cor, true);
-    }
-
-    @Override
-    public String desenho(){
-        if (this.getCor().equals("preto"))
-            return "\u001B[31m" + "D" + "\u001B[0m";
-        else
-            return "D"; 
-    }
-    //abstract String desenho();
-    //abstract boolean movimentoValido(int colunaO, char linhaO, int colunaD, char linhaD);
-    //abstract String caminho(int colunaO, char linhaO, int colunaD, char linhaD); 
-
-	@Override
-	boolean movimentoValido( int linhaO, char colunaO, int  linhaD, char colunaD) {
-		 int diferencaColuna = Math.abs(colunaO - colunaD);
-	        int diferencaLinha = Math.abs(linhaO - linhaD);
-	        return (diferencaColuna == diferencaLinha) || (diferencaColuna == 0) || (diferencaLinha == 0);
+	/**
+	 * Construtor que recebe a cor da peça e faz a chamada ao construtor da classe Base para iniciar os atributos tipo, cor e inGame
+	 * @param cor
+	 */
+	public Dama(String cor) {
+		super("D", cor, true);
 	}
 
+	/**
+	 * Implementação do método desenho que retorna o tipo de peça (dama)
+	 */
 	@Override
-	String caminho( int linhaO, char colunaO, int  linhaD, char colunaD) {
-	    if(this.movimentoValido(linhaO, colunaO, linhaD, colunaD)) {
-            StringBuilder caminho = new StringBuilder();
-            int diferencaColuna = Math.abs(colunaO - colunaD);
+	String desenho() {
+		return this.tipo;
+	}
+
+	/**
+	 * Implementação do método que verifica se o movimento é válido para a dama
+	 * @param linhaO   Linha correspondente a posição inicial
+	 * @param colunaO Coluna correspondente a posição inicial 
+	 * @param linhaD Linha correspondente a posição final
+	 * @param colunaD Coluna correspondente a posição final
+	 */
+	@Override
+	protected boolean movimentoValido(int linhaO, char colunaO, int linhaD, char colunaD) {
+		int diferencaColuna = Math.abs(colunaO - colunaD);
+		int diferencaLinha = Math.abs(linhaO - linhaD);
+		return (diferencaColuna == diferencaLinha) || (diferencaColuna == 0) || (diferencaLinha == 0);
+	}
+
+	/**
+	 * Implementação do método caminho que chama verificação de movimento válido e monta o caminho com base na posição inicial e final
+	 * @param linhaO   Linha correspondente a posição inicial
+	 * @param colunaO Coluna correspondente a posição inicial 
+	 * @param linhaD Linha correspondente a posição final
+	 * @param colunaD Coluna correspondente a posição final
+	 */
+	@Override
+	protected String caminho(int linhaO, char colunaO, int linhaD, char colunaD) {
+		if (this.movimentoValido(linhaO, colunaO, linhaD, colunaD)) {
+			StringBuilder caminho = new StringBuilder();
+			int diferencaColuna = Math.abs(colunaO - colunaD);
 			int diferencaLinha = Math.abs(linhaO - linhaD);
-         
-            
-            if(diferencaColuna == diferencaLinha) {
-            	 int linhaAtual = linhaO;
-     			int colunaAtual = colunaO;
 
-     			// Converte coluna de char para int para facilitar o cálculo
-     			int colunaAtualInt = colunaAtual - 'a';
-     			int colunaDestinoInt = colunaD - 'a';
+			if (diferencaColuna == diferencaLinha) {
+				int linhaAtual = linhaO;
+				int colunaAtual = colunaO;
 
-     			while (linhaAtual != linhaD || colunaAtualInt != colunaDestinoInt) {
-     				caminho.append(linhaAtual).append((char) (colunaAtualInt + 'a'));
+				// Converte coluna de char para int para facilitar o cálculo
+				int colunaAtualInt = colunaAtual - 'a';
+				int colunaDestinoInt = colunaD - 'a';
 
-     				if (linhaAtual < linhaD)
-     					linhaAtual++;
-     				else
-     					linhaAtual--;
+				while (linhaAtual != linhaD || colunaAtualInt != colunaDestinoInt) {
+					caminho.append(linhaAtual).append((char) (colunaAtualInt + 'a'));
 
-     				if (colunaAtualInt < colunaDestinoInt)
-     					colunaAtualInt++;
-     				else
-     					colunaAtualInt--;
+					if (linhaAtual < linhaD)
+						linhaAtual++;
+					else
+						linhaAtual--;
 
-     				colunaAtual = (char) (colunaAtualInt + 'a');
-            }
-     			caminho.append(linhaD).append(colunaD);
-            }else {
-            	   if (colunaO < colunaD) {
-                       for (int i = colunaO; i <= colunaD; i++) {
-                           caminho.append(linhaO).append((char)i);
-                       }
-                   } 
-                   
-                   if(linhaO < linhaD) {
-                   	
-                   	  for (int i = linhaO; i <= linhaD; i++) {
-       	                    caminho.append(i).append(colunaO);
-       	                }
-       	            }
-            }
-            
-            return caminho.toString();
-        } else {
-            return "";
-        }
-    }
+					if (colunaAtualInt < colunaDestinoInt)
+						colunaAtualInt++;
+					else
+						colunaAtualInt--;
+
+					colunaAtual = (char) (colunaAtualInt + 'a');
+				}
+				caminho.append(linhaD).append(colunaD);
+			} else {
+				if (colunaO < colunaD) {
+					for (int i = colunaO; i <= colunaD; i++) {
+						caminho.append(linhaO).append((char) i);
+					}
+				}
+
+				if (linhaO < linhaD) {
+
+					for (int i = linhaO; i <= linhaD; i++) {
+						caminho.append(i).append(colunaO);
+					}
+				}
+			}
+
+			return caminho.toString();
+		} else {
+			return "";
+		}
+	}
 }
