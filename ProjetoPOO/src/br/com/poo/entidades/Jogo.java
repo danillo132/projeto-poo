@@ -26,7 +26,8 @@ public class Jogo {
 	private boolean jogoFinalizado;
 
 	/**
-	 * Construtor responsável por criar os dois jogadores da partida e o tabuleiro contendo as peças em formação inicial
+	 * Construtor responsável por criar os dois jogadores da partida e o tabuleiro
+	 * contendo as peças em formação inicial
 	 */
 	public Jogo() {
 		// Cria dois jogadores
@@ -63,7 +64,7 @@ public class Jogo {
 	}
 
 	/**
-	 * Método que realiza a formação inicial das peças brancas e pretas do tabuleiro 
+	 * Método que realiza a formação inicial das peças brancas e pretas do tabuleiro
 	 */
 	public void inicializarPeças() {
 
@@ -105,13 +106,12 @@ public class Jogo {
 
 	}
 
-
 	/**
 	 * Método que realiza a inicialização do jogo
 	 */
 	public void iniciarJogo() {
 		while (!jogoFinalizado) {
-			System.out.println(this.tabuleiro.desenho()); 
+			System.out.println(this.tabuleiro.desenho());
 			System.out.println("Vez do jogador: " + jogadorAtual.getNomeJogador());
 			System.out.println("Digite sua jogada ou salvar (para salvar e sair)");
 			String entrada = "";
@@ -119,34 +119,31 @@ public class Jogo {
 			boolean jogadaValida = false;
 
 			while (!entradaValida) {
-			    try {
-			        entrada = jogadorAtual.informaJogada();
-			        entradaValida = validarEntrada(entrada);
-			        if (!entradaValida) {
-			            throw new IllegalArgumentException("Entrada inválida. Por favor, insira uma coordenada válida no formato XXYY (onde X e Y são números entre 1 e 8, e XY são letras entre a e h).");
-			        }
-			    } catch (IllegalArgumentException e) {
-			        System.out.println(e.getMessage());
-			    }
+				try {
+					entrada = jogadorAtual.informaJogada();
+					entradaValida = validarEntrada(entrada);
+					if (!entradaValida) {
+						throw new IllegalArgumentException(
+								"Entrada inválida. Por favor, insira uma coordenada válida no formato XXYY (onde X e Y são números entre 1 e 8, e XY são letras entre a e h).");
+					}
+				} catch (IllegalArgumentException e) {
+					System.out.println(e.getMessage());
+				}
 			}
-			
-			
-			
 
 			if (entrada.equalsIgnoreCase("salvar")) {
 
 				jogoFinalizado = true;
 				registroJogo();
-			}else if(entrada.equalsIgnoreCase("parar")) {
+			} else if (entrada.equalsIgnoreCase("parar")) {
 				jogoFinalizado = true;
-			}else {
-			
+			} else {
+
 				int linhaO = 8 - Character.getNumericValue(entrada.charAt(0));
 				int colunaO = entrada.charAt(1) - 'a';
 
-				int linhaD = 8- Character.getNumericValue(entrada.charAt(2));
+				int linhaD = 8 - Character.getNumericValue(entrada.charAt(2));
 				int colunaD = entrada.charAt(3) - 'a';
-				
 
 				Jogada jogada = new Jogada(jogadorAtual, jogadorAdversario, tabuleiro.getCasa(linhaO, colunaO),
 						tabuleiro.getCasa(linhaD, colunaD));
@@ -156,21 +153,18 @@ public class Jogo {
 				} catch (NullPointerException e) {
 					System.out.println(e.getMessage());
 				}
-			
-				if(jogadaValida) {
-					realizarJogada(linhaO,colunaO, linhaD, colunaD);
-					if(jogada.ehXeque(tabuleiro)) {
+
+				if (jogadaValida) {
+					realizarJogada(linhaO, colunaO, linhaD, colunaD);
+					if (jogada.ehXeque(tabuleiro)) {
 						System.out.println("O Rei está em xeque!");
-						if(jogada.ehXequeMate(tabuleiro)) {
+						if (jogada.ehXequeMate(tabuleiro)) {
 							System.out.println("Xeque-mate!");
 						}
 					}
-				
-					
+
 				}
-			
-			
-				
+
 				if (jogadorAtual.getNomeJogador().equalsIgnoreCase(jogador1.getNomeJogador())) {
 					jogadorAtual = jogador2;
 					jogadorAdversario = jogador1;
@@ -181,17 +175,17 @@ public class Jogo {
 				System.out.println(jogadorAtual.pecasCapturadas());
 			}
 			historicoJogadas.add(entrada);
-			
+
 		}
 		System.out.println("Jogo finalizado");
 
 	}
-	
+
 	private void realizarJogada(int linhaO, int colunaO, int linhaD, int colunaD) {
 		Casa casaDestino = tabuleiro.getCasa(linhaD, colunaD);
-		if(casaDestino.getPeça() != null) {
-			
-			if(casaDestino.getPeça().getTipo().equalsIgnoreCase("R")) {
+		if (casaDestino.getPeça() != null) {
+
+			if (casaDestino.getPeça().getTipo().equalsIgnoreCase("R")) {
 				System.out.println("O rei foi capturado!");
 				jogoFinalizado = true;
 				return;
@@ -203,38 +197,36 @@ public class Jogo {
 		Casa casaOrigem = tabuleiro.getCasa(linhaO, colunaO);
 		casaOrigem.setPeça(null);
 		casaOrigem.desocuparCasa();
-		
-		
-		
+
 		tabuleiro.desenho();
-			}
-	
-	private void  registroJogo() {
-		  try (PrintWriter writer = new PrintWriter(new FileWriter("jogosalvo.txt"))) {
-		        for (String jogada : historicoJogadas) {
-		            writer.println(jogada);
-		        }
-		        System.out.println("Histórico de jogo salvo com sucesso!");
-		    } catch (IOException e) {
-		        System.err.println("Erro ao salvar o histórico de jogo: " + e.getMessage());
-		    }
 	}
-	
+
+	private void registroJogo() {
+		try (PrintWriter writer = new PrintWriter(new FileWriter("jogosalvo.txt"))) {
+			for (String jogada : historicoJogadas) {
+				writer.println(jogada);
+			}
+			System.out.println("Histórico de jogo salvo com sucesso!");
+		} catch (IOException e) {
+			System.err.println("Erro ao salvar o histórico de jogo: " + e.getMessage());
+		}
+	}
+
 	public void capturarPeca(Tabuleiro tabuleiro, Peça peca, Jogador jogadorAdversario) {
-		if(peca != null) {
-			if(peca.getCor().equalsIgnoreCase(jogadorAdversario.getPeças().get(0).getCor())) {
-				   jogadorAdversario.getPeças().remove(peca);
-				   peca.setInGame(false);
-				   jogadorAdversario.getPeças().add(peca);
-		            
-		            // Atualizar o número de peças ativas
-		            jogadorAdversario.setNumPeçasAtivas(jogadorAdversario.getPeças().size());
+		if (peca != null) {
+			if (peca.getCor().equalsIgnoreCase(jogadorAdversario.getPeças().get(0).getCor())) {
+				jogadorAdversario.getPeças().remove(peca);
+				peca.setInGame(false);
+				jogadorAdversario.getPeças().add(peca);
+
+				jogadorAdversario.setNumPeçasAtivas(jogadorAdversario.getPeças().size());
 			}
 		}
 	}
 
 	/**
-	 * Método que chama a validação da jogada 
+	 * Método que chama a validação da jogada
+	 * 
 	 * @param linhaO
 	 * @param colunaO
 	 * @param linhaD
@@ -270,49 +262,47 @@ public class Jogo {
 			// Verificar se o caminho está livre, exceto para cavalos
 
 		}
-		
-		
+
 		return true;
 	}
-	
+
 	private boolean validarEntrada(String entrada) {
-		if(entrada.equalsIgnoreCase("salvar") || entrada.equalsIgnoreCase("parar")) {
+		if (entrada.equalsIgnoreCase("salvar") || entrada.equalsIgnoreCase("parar")) {
 			return true;
-		}else {
-			 if (entrada.length() != 4) {
-			        return false;
-			    }
-			    
-			    if (!Character.isDigit(entrada.charAt(0))) {
-			        return false;
-			    }
-			    
-			    if (!Character.isLetter(entrada.charAt(1))) {
-			        return false;
-			    }
-			    
-			    if (!Character.isDigit(entrada.charAt(2))) {
-			        return false;
-			    }
-			    
-			    if (!Character.isLetter(entrada.charAt(3))) {
-			        return false;
-			    }
-			    
-			    if (entrada.charAt(0) < '1' || entrada.charAt(0) > '8') {
-			        return false;
-			    }
-			    
-			    if (entrada.charAt(2) < '1' || entrada.charAt(2) > '8') {
-			        return false;
-			    }
-			    
-			    if (entrada.charAt(1) > 'h' || entrada.charAt(3) > 'h') {
-			        return false;
-			    }
+		} else {
+			if (entrada.length() != 4) {
+				return false;
+			}
+
+			if (!Character.isDigit(entrada.charAt(0))) {
+				return false;
+			}
+
+			if (!Character.isLetter(entrada.charAt(1))) {
+				return false;
+			}
+
+			if (!Character.isDigit(entrada.charAt(2))) {
+				return false;
+			}
+
+			if (!Character.isLetter(entrada.charAt(3))) {
+				return false;
+			}
+
+			if (entrada.charAt(0) < '1' || entrada.charAt(0) > '8') {
+				return false;
+			}
+
+			if (entrada.charAt(2) < '1' || entrada.charAt(2) > '8') {
+				return false;
+			}
+
+			if (entrada.charAt(1) > 'h' || entrada.charAt(3) > 'h') {
+				return false;
+			}
 		}
-	   
-	    
-	    return true;
+
+		return true;
 	}
 }

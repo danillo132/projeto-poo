@@ -29,33 +29,31 @@ public class Gerenciador {
 			System.out.println("2 - Carregar um jogo salvo");
 			System.out.println("3 - Sair");
 
-		
+			try {
+				opcao = ler.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Por favor, digite um número inteiro válido.");
+				ler.next();
+				continue;
+			}
 
-			 try {
-		            opcao = ler.nextInt();
-		        } catch (InputMismatchException e) {
-		            System.out.println("Por favor, digite um número inteiro válido.");
-		            ler.next();
-		            continue;
-		        }
-
-		        if (opcao >= 1 && opcao <= 3) {
-		            switch (opcao) {
-		                case 1:
-		                    jogo = new Jogo();
-		                    jogo.iniciarJogo();
-		                    break;
-		                case 2:
-		                    carregarJogo();
-		                    break;
-		                case 3:
-		                    System.out.println("Encerrando...\n");
-		                    return;
-		            }
-		        } else {
-		            System.out.println("Opção inválida.Digite um número entre 1 e 3");
-		        }
-		    } while (opcao != 3);
+			if (opcao >= 1 && opcao <= 3) {
+				switch (opcao) {
+				case 1:
+					jogo = new Jogo();
+					jogo.iniciarJogo();
+					break;
+				case 2:
+					carregarJogo();
+					break;
+				case 3:
+					System.out.println("Encerrando...\n");
+					return;
+				}
+			} else {
+				System.out.println("Opção inválida.Digite um número entre 1 e 3");
+			}
+		} while (opcao != 3);
 
 	}
 
@@ -64,9 +62,8 @@ public class Gerenciador {
 	 */
 	private static void testesDesenvolvimento() {
 		List<Peça> pecasJogador1 = new ArrayList<>();
-		
+
 		List<Peça> pecasJogador2 = new ArrayList<>();
-		
 
 		System.out.println("=======Peças Brancas======");
 		Peça torreB = new Torre("white");
@@ -93,8 +90,7 @@ public class Gerenciador {
 		pecasJogador1.add(bispoB);
 		pecasJogador1.add(damaB);
 		pecasJogador1.add(peaoB);
-		
-		
+
 		System.out.println("============================");
 
 		System.out.println("=======Peças Pretas======");
@@ -115,7 +111,8 @@ public class Gerenciador {
 
 		Peça cavaloP = new Cavalo("preto");
 		System.out.println("Peça: " + cavaloP.desenho() + " caminho: " + cavaloP.caminho(2, 'a', 1, 'y'));
-		cavaloP.setInGame(false);;
+		cavaloP.setInGame(false);
+		;
 		pecasJogador2.add(torreP);
 		pecasJogador2.add(reiP);
 		pecasJogador2.add(cavaloP);
@@ -123,42 +120,33 @@ public class Gerenciador {
 		pecasJogador2.add(damaP);
 		pecasJogador2.add(peaoP);
 		System.out.println("============================");
-		 
-		
+
 		Jogador jogador1 = new Jogador("Marcos", pecasJogador1);
-		System.out.println("Nome jogador 1: "+ jogador1.getNomeJogador()); 
-		System.out.println("Peças capturadas: "+ jogador1.pecasCapturadas()); 
-		
+		System.out.println("Nome jogador 1: " + jogador1.getNomeJogador());
+		System.out.println("Peças capturadas: " + jogador1.pecasCapturadas());
+
 		Jogador jogador2 = new Jogador("Pedro", pecasJogador2);
 		String jogada1 = jogador1.informaJogada();
-		
+
 		String[] formatarJogada = jogada1.split("");
 		for (int i = 0; i < formatarJogada.length; i += 2) {
 			if (formatarJogada[i] != null && formatarJogada[i + 1] != null) {
 				int linha = Integer.parseInt(formatarJogada[i]);
 				char coluna = formatarJogada[i + 1].charAt(0);
-				Casa posicaoInicial = new Casa(bispoB.getCor() ,linha, coluna, true, bispoB);
-				Casa posicaoFinal = new Casa(bispoB.getCor() ,linha, coluna, true, bispoB);
+				Casa posicaoInicial = new Casa(bispoB.getCor(), linha, coluna, true, bispoB);
+				Casa posicaoFinal = new Casa(bispoB.getCor(), linha, coluna, true, bispoB);
 			}
 		}
-		
-				
-		System.out.println("Nome jogador 2: "+ jogador1.getNomeJogador()); 
-		System.out.println("Peças capturadas: "+ jogador1.pecasCapturadas()); 
-		
+
+		System.out.println("Nome jogador 2: " + jogador1.getNomeJogador());
+		System.out.println("Peças capturadas: " + jogador1.pecasCapturadas());
+
 		Jogada jogada = new Jogada(jogador1, jogador2, null, null);
 
 	}
 
-	/*
-	 * public void novoJogo() { jogo = new Jogo(); jogo.iniciarJogo(); }
-	 */
-
 	public void carregarJogo() {
 
 	}
-	
-		
-
 
 }

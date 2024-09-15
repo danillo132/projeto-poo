@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe responsável por criar o caminho fornecido pela peça em sequência de casas
+ * Classe responsável por criar o caminho fornecido pela peça em sequência de
+ * casas
  */
 public class Caminho {
 
@@ -14,8 +15,9 @@ public class Caminho {
 
 	/**
 	 * Construtor que recebe a casa inicial e a casa final do caminho a ser criado
+	 * 
 	 * @param posicaoInicial casa inicial
-	 * @param posicaoFinal casa final 
+	 * @param posicaoFinal   casa final
 	 */
 	public Caminho(Casa posicaoInicial, Casa posicaoFinal) {
 		sequenciaDeCasas = new ArrayList<>();
@@ -28,19 +30,21 @@ public class Caminho {
 	}
 
 	/**
-	 * Método que transforma o caminho fornecido da peça na casa inicial em uma sequência de casas até a casa final
-	 * @param tabuleiro 
-	 * @throws NullPointerException 
+	 * Método que transforma o caminho fornecido da peça na casa inicial em uma
+	 * sequência de casas até a casa final
+	 * 
+	 * @param tabuleiro
+	 * @throws NullPointerException
 	 */
 	public void populaCaminho(Tabuleiro tabuleiro) throws NullPointerException {
 		String caminhoDaPeca = "";
 		try {
-			 caminhoDaPeca = posicaoInicial.getPeça().caminho(posicaoInicial.getLinha(), posicaoInicial.getColuna(),
+			caminhoDaPeca = posicaoInicial.getPeça().caminho(posicaoInicial.getLinha(), posicaoInicial.getColuna(),
 					posicaoFinal.getLinha(), posicaoFinal.getColuna());
 		} catch (NullPointerException e) {
 			throw new NullPointerException("Sua peça não está nessa posição!");
 		}
-	
+
 		if (!caminhoDaPeca.isEmpty()) {
 			String[] partesCaminho = caminhoDaPeca.split("");
 			for (int i = 0; i < partesCaminho.length; i += 2) {
@@ -50,12 +54,10 @@ public class Caminho {
 					if (tabuleiro.getTabuleiro()[linha][coluna] != null) {
 						Casa casaNoTabuleiro = tabuleiro.getCasa(linha, coluna);
 
-//						Casa novaCasa = new Casa(casaNoTabuleiro.getCor(), linha,(char) (coluna + 'a'), casaNoTabuleiro.isOcupada(),
-//								casaNoTabuleiro.getPeça());
-						if(!sequenciaDeCasas.contains(casaNoTabuleiro)) {
+						if (!sequenciaDeCasas.contains(casaNoTabuleiro)) {
 							sequenciaDeCasas.add(casaNoTabuleiro);
 						}
-						
+
 					}
 
 				}
@@ -65,6 +67,7 @@ public class Caminho {
 
 	/**
 	 * Método que verifica se o caminho fornecido pela peça está livre
+	 * 
 	 * @return retorna true se estiver livre e false caso tenha uma peça na casa
 	 */
 	public boolean estaLivre() {
@@ -81,7 +84,8 @@ public class Caminho {
 	}
 
 	/**
-	 * Método que retorna a casa inicial 
+	 * Método que retorna a casa inicial
+	 * 
 	 * @return Casa inicial
 	 */
 	public Casa casaInicial() {
@@ -93,6 +97,7 @@ public class Caminho {
 
 	/**
 	 * Método que retorna a casa final
+	 * 
 	 * @return Casa final
 	 */
 	public Casa casaFinal() {
