@@ -24,7 +24,7 @@ public abstract class Peça {
 	}
 
 	public Peça(String tipo, String cor, boolean inGame) {
-        if (cor.equals("black")){
+        if (cor.equals("preto")){
             this.tipo = "\u001B[31m" + tipo + "\u001B[0m";
         } else {
             this.tipo = tipo;

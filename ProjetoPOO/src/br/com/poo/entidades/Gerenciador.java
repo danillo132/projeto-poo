@@ -9,6 +9,7 @@ import java.util.Scanner;
 public class Gerenciador {
 
     public static void main(String[] args) {
+    	testesDesenvolvimento();
         Gerenciador gerenciador = new Gerenciador();
         gerenciador.menu();        
     }
@@ -50,23 +51,45 @@ public class Gerenciador {
          * Método responsável pelos testes exaustivos durante o desenvolvimento
          */
     	
-    	Peça torre = new Torre("white");
-    	System.out.println( torre.caminho(4, 'b', 4, 'g'));
+    	System.out.println("=======Peças Brancas======");
+    	Peça torreB = new Torre("white");
+    	System.out.println("Peça: " + torreB.desenho() + " caminho: " +  torreB.caminho(4, 'b', 4, 'g'));
     	
-    	Peça rei = new Rei("white");
-    	System.out.println( rei.caminho(2, 'd', 3, 'e'));
+    	Peça reiB = new Rei("white");
+    	System.out.println("Peça: " + reiB.desenho() + " caminho: " + reiB.caminho(2, 'd', 3, 'e'));
     	
-    	Peça bispo = new Bispo("white");
-    	System.out.println( bispo.caminho(3, 'c', 5, 'a'));
+    	Peça bispoB = new Bispo("white");
+    	System.out.println("Peça: " + bispoB.desenho() + " caminho: " + bispoB.caminho(3, 'c', 5, 'a'));
     	
-    	Peça dama = new Dama("white");
-    	System.out.println( dama.caminho(2, 'c', 6, 'g'));
+    	Peça damaB = new Dama("white");
+    	System.out.println("Peça: " + damaB.desenho() + " caminho: " + damaB.caminho(2, 'c', 6, 'g'));
     	
-//    	Peça peao = new Peão("white");
-//    	System.out.println( peao.caminho(2, 'c', 3, 'b'));
-//    	
-    	Peça cavalo = new Cavalo("white");
-    	System.out.println( cavalo.caminho(2, 'a', 1, 'c'));
+    	Peça peaoB = new Peão("white");
+    	System.out.println("Peça: " + peaoB.desenho() + " caminho: " + peaoB.caminho(2, 'c', 3, 'b'));
+    	
+    	Peça cavaloB = new Cavalo("white");
+    	System.out.println("Peça: " + cavaloB.desenho() + " caminho: " + cavaloB.caminho(2, 'a', 1, 'c'));
+    	System.out.println("============================");
+    	
+    	System.out.println("=======Peças Pretas======");
+    	Peça torreP = new Torre("preto");
+    	System.out.println("Peça: " + torreP.desenho() + " caminho: " + torreP.caminho(4, 'b', 4, 'g'));
+    	
+    	Peça reiP = new Rei("preto");
+    	System.out.println("Peça: " + reiP.desenho() + " caminho: " + reiP.caminho(2, 'd', 3, 'e'));
+    	
+    	Peça bispoP = new Bispo("preto");
+    	System.out.println("Peça: " + bispoP.desenho() + " caminho: " + bispoP.caminho(3, 'c', 5, 'a'));
+    	
+    	Peça damaP = new Dama("preto");
+    	System.out.println("Peça: " + damaP.desenho() + " caminho: " + damaP.caminho(2, 'c', 6, 'g'));
+    	
+    	Peça peaoP = new Peão("preto");
+    	System.out.println("Peça: " + peaoP.desenho() + " caminho: " + peaoP.caminho(2, 'c', 3, 'b'));
+    	
+    	Peça cavaloP = new Cavalo("preto");
+    	System.out.println("Peça: " + cavaloP.desenho() + " caminho: " + cavaloP.caminho(2, 'a', 1, 'c'));
+    	System.out.println("============================");
     	
 
 
