@@ -101,15 +101,14 @@ public class Jogo {
             String entrada = ler.nextLine();
 
             if (entrada.equals("salvar")) {
-                
+
                 jogoFinalizado = true;
             } else {
-                int linhaO = Character.getNumericValue(entrada.charAt(0))-1;
+                int linhaO = Character.getNumericValue(entrada.charAt(0)) - 1;
                 int colunaO = entrada.charAt(1) - 'a';
 
-                int linhaD = Character.getNumericValue(entrada.charAt(2))-1;
+                int linhaD = Character.getNumericValue(entrada.charAt(2)) - 1;
                 int colunaD = entrada.charAt(3) - 'a';
-                
 
                 Jogada jogada = new Jogada(jogadorAtual, jogadorAdversario, tabuleiro.getCasa(linhaO, colunaO), tabuleiro.getCasa(linhaD, colunaD));
 
@@ -143,16 +142,36 @@ public class Jogo {
 
     }
 
-    public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD){
+    public boolean jogadaValida(int linhaO, int colunaO, int linhaD, int colunaD) {
         char colunas[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
-        
-        if(!(tabuleiro.noLimite(linhaO, colunas[colunaO-1]) && tabuleiro.noLimite(linhaD, colunas[colunaD-1])))
+
+        if (!(tabuleiro.noLimite(linhaO, colunas[colunaO - 1]) && tabuleiro.noLimite(linhaD, colunas[colunaD - 1]))) {
             return false;
-        else{
+        } else {
             Casa origem = tabuleiro.getCasa(linhaO, colunaO);
             Casa destino = tabuleiro.getCasa(linhaD, colunaD);
-            
-            if()
+
+            if (origem == destino) {
+                return false;
+            }
+            //Verifica se há uma casa na origem
+            if (!origem.isOcupada()) {
+                return false;
+            }
+
+            //Verifica se a peça é do adversário, não do jogador atual
+            if (origem.getCor().equals(destino.getCor())) {
+                return false;
+            }
+
+            //vcerifica se o movimento é valido para o tipo de peça
+            if (!origem.getPeça().movimentoValido(linhaO, colunas[colunaO - 1], linhaD, colunas[colunaD - 1])) {
+                return false;
+            }
+            //Verificar se o caminho está livre, exceto para cavalos
+
+
         }
+        return true;
     }
 }
