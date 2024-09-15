@@ -73,6 +73,13 @@ public class Jogador {
 	public String getNomeJogador() {
 		return nomeJogador;
 	}
+	
+	
+
+
+	public void setNumPeçasAtivas(int numPeçasAtivas) {
+		this.numPeçasAtivas = numPeçasAtivas;
+	}
 
 	public void peçasDe() {
 		System.out.println("Nome: " + nomeJogador);

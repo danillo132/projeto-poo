@@ -145,7 +145,7 @@ public class Jogada {
 				}
 
 				int novaLinha = casaDoRei.getLinha() + horizontal;
-				int novaColuna = casaDoRei.getColuna() - vertical;
+				int novaColuna = (casaDoRei.getColuna() - vertical) - 'a';
 
 				if (!tabuleiro.noLimite(novaLinha, (char) novaColuna)) {
 					continue;
@@ -184,11 +184,13 @@ public class Jogada {
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				Casa casa = tabuleiro.getTabuleiro()[i][j];
-				if (casa != null && !casa.getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
+				if (casa != null && casa.getPeça() != null && !casa.getPeça().getCor().equalsIgnoreCase(corPeçasJogador)) {
 					adversarios.add(casa);
 				}
 			}
 		}
 		return adversarios;
 	}
+	
+
 }

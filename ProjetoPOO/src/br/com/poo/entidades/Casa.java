@@ -52,6 +52,9 @@ public class Casa {
 	public void ocuparCasa() {
 		this.ocupada = true;
 	}
+	public void desocuparCasa() {
+		this.ocupada = false;
+	}
 
 	/**
 	 * Método que realiza a adição da peça à casa de forma direta

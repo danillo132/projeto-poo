@@ -33,7 +33,7 @@ public class Peão extends Peça {
 		int difColuna = Math.abs(colunaO - colunaD);
 		int difLinha = Math.abs(linhaO - linhaD);
 
-		boolean movimentoNormal = (colunaO == colunaD) && (difLinha == 1 || (difLinha == 2 && linhaO == 2));
+		boolean movimentoNormal = (colunaO == colunaD) && (difLinha == 1 || (difLinha == 2 && linhaO == 6) || (difLinha ==2 && linhaO == 1));
 
 		boolean captura = (difColuna == 1 && difLinha == 1);
 

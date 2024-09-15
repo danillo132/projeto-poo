@@ -30,10 +30,17 @@ public class Caminho {
 	/**
 	 * Método que transforma o caminho fornecido da peça na casa inicial em uma sequência de casas até a casa final
 	 * @param tabuleiro 
+	 * @throws NullPointerException 
 	 */
-	public void populaCaminho(Tabuleiro tabuleiro) {
-		String caminhoDaPeca = posicaoInicial.getPeça().caminho(posicaoInicial.getLinha(), posicaoInicial.getColuna(),
-				posicaoFinal.getLinha(), posicaoFinal.getColuna());
+	public void populaCaminho(Tabuleiro tabuleiro) throws NullPointerException {
+		String caminhoDaPeca = "";
+		try {
+			 caminhoDaPeca = posicaoInicial.getPeça().caminho(posicaoInicial.getLinha(), posicaoInicial.getColuna(),
+					posicaoFinal.getLinha(), posicaoFinal.getColuna());
+		} catch (NullPointerException e) {
+			throw new NullPointerException("Sua peça não está nessa posição!");
+		}
+	
 		if (!caminhoDaPeca.isEmpty()) {
 			String[] partesCaminho = caminhoDaPeca.split("");
 			for (int i = 0; i < partesCaminho.length; i += 2) {

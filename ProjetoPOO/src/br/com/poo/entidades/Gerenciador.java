@@ -1,6 +1,7 @@
 package br.com.poo.entidades;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,28 +21,41 @@ public class Gerenciador {
 	Scanner ler = new Scanner(System.in);
 
 	public void menu() {
-
-		while (true) {
+		int opcao = 0;
+		do {
 			System.out.println("Bem vindo!");
 			System.out.println("Escolha uma das opcoes abaixo:");
 			System.out.println("1 - iniciar novo jogo");
 			System.out.println("2 - Carregar um jogo salvo");
 			System.out.println("3 - Sair");
 
-			int opcao = ler.nextInt();
+		
 
-			if (opcao == 1) {
-				Jogo jogo1 = new Jogo();
-				jogo.iniciarJogo();
-			}
-			if (opcao == 2) {
-				carregarJogo();
-			}
-			if (opcao == 3) {
-				System.err.println("Encerrando...\n");
-				return;
-			}
-		}
+			 try {
+		            opcao = ler.nextInt();
+		        } catch (InputMismatchException e) {
+		            System.out.println("Por favor, digite um número inteiro válido.");
+		            ler.next();
+		            continue;
+		        }
+
+		        if (opcao >= 1 && opcao <= 3) {
+		            switch (opcao) {
+		                case 1:
+		                    jogo = new Jogo();
+		                    jogo.iniciarJogo();
+		                    break;
+		                case 2:
+		                    carregarJogo();
+		                    break;
+		                case 3:
+		                    System.out.println("Encerrando...\n");
+		                    return;
+		            }
+		        } else {
+		            System.out.println("Opção inválida.Digite um número entre 1 e 3");
+		        }
+		    } while (opcao != 3);
 
 	}
 
@@ -144,8 +158,7 @@ public class Gerenciador {
 
 	}
 	
-	public void salvarJogo() {
 		
-	}
+
 
 }

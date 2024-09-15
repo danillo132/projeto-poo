@@ -46,7 +46,7 @@ public class Tabuleiro {
 	 * @return
 	 */
 	public boolean noLimite(int linha, char coluna) {
-		return (coluna >= 'a' && coluna <= 'h') && (linha >= 1 && linha <= 8);
+		return (coluna >= 'a' && coluna <= 'h') && (linha >= 0 && linha <= 7);
 	}
 
 	/**
