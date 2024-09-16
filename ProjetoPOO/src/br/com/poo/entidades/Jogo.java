@@ -22,7 +22,6 @@ public class Jogo {
 	private Jogador jogadorAtual;
 	private Jogador jogadorAdversario;
 	private List<String> historicoJogadas;
-	private List<Jogada> jogadas;
 	private boolean jogoFinalizado;
 
 	/**
@@ -38,7 +37,6 @@ public class Jogo {
 
 		this.peçasBrancas = new ArrayList<>();
 		this.peçasPretas = new ArrayList<>();
-		this.jogadas = new ArrayList<>();
 		this.historicoJogadas = new ArrayList<>();
 
 		inicializarPeças();

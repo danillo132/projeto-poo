@@ -6,7 +6,6 @@ package br.com.poo.entidades;
 public class Tabuleiro {
 
 	private Casa[][] tabuleiro;
-	private String desenho;
 
 	/**
 	 * Construtor que realiza a construção de um tabuleiro 8x8 com linhas númericas e colunas alfabéticas
@@ -96,8 +95,5 @@ public class Tabuleiro {
 	public Casa getCasa(int linha, int coluna) {
 		return tabuleiro[linha][coluna];
 	}
-	/*
-	 * public static void main(String[] args) { Tabuleiro board1 = new Tabuleiro();
-	 * System.out.println("\n" + board1.desenho()); }
-	 */
+
 }
